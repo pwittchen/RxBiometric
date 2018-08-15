@@ -1,6 +1,6 @@
 RxBiometric
 ===========
-RxJava bindings for Biometric Prompt on Android (added since Android 9 Pie, API 28+)
+RxJava bindings for Biometric Prompt on Android (added in Android 9 Pie, API Level 28+)
 
 References
 ----------
