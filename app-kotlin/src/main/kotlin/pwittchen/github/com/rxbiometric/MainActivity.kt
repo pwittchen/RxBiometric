@@ -1,13 +1,14 @@
 package pwittchen.github.com.rxbiometric
 
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.github.pwittchen.rxbiometric.library.Preconditions
 import com.github.pwittchen.rxbiometric.library.RxBiometric
+import com.github.pwittchen.rxbiometric.library.validation.RxPreconditions
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,21 +21,21 @@ import kotlinx.android.synthetic.main.content_main.button
 //TODO #2: remove commented code
 class MainActivity : AppCompatActivity() {
 
-  @RequiresApi(28)
+  @RequiresApi(Build.VERSION_CODES.P)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
 
-    if (!Preconditions.isAtLeastAndroidPie()) {
-      showMessage("need at least Android Pie")
-      return
-    }
-
-    if (!Preconditions.hasBiometricSupport(this)) {
-      showMessage("no biometric support")
-      return
-    }
+//    if (!Preconditions.isAtLeastAndroidPie()) {
+//      showMessage("need at least Android Pie")
+//      return
+//    }
+//
+//    if (!Preconditions.hasBiometricSupport(this)) {
+//      showMessage("no biometric support")
+//      return
+//    }
 
 //    val prompt = BiometricPrompt
 //      .Builder(this)
@@ -85,19 +86,23 @@ class MainActivity : AppCompatActivity() {
 //        })
 //    }
 
-    button.setOnClickListener {
-
-      RxBiometric
-        .title("title")
-        .description("description")
-        .negativeButtonText("cancel")
-        .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
-          showMessage("cancel")
-        })
-        .cancellationSignal(cancellationSignal)
-        .executor(mainExecutor)
-        .build()
-        .authenticate(this)
+    button.setOnClickListener { _ ->
+      RxPreconditions
+        .hasBiometricSupport(this)
+        .flatMap { RxPreconditions.isAtLeastAndroidPie() }
+        .flatMapCompletable {
+          RxBiometric
+            .title("title")
+            .description("description")
+            .negativeButtonText("cancel")
+            .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
+              showMessage("cancel")
+            })
+            .cancellationSignal(cancellationSignal)
+            .executor(mainExecutor)
+            .build()
+            .authenticate(this)
+        }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(

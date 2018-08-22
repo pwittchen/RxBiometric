@@ -1,9 +1,8 @@
-package com.github.pwittchen.rxbiometric.library
+package com.github.pwittchen.rxbiometric.library.validation
 
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import io.reactivex.Single
 
 class Preconditions {
   companion object {
@@ -11,16 +10,8 @@ class Preconditions {
       return context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
     }
 
-    @JvmStatic fun hasBiometricSupportRx(context: Context): Single<Boolean> {
-      return Single.just(hasBiometricSupport(context))
-    }
-
     @JvmStatic fun isAtLeastAndroidPie(): Boolean {
       return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
-    }
-
-    @JvmStatic fun isAtLeastAndroidPieRx(): Single<Boolean> {
-      return Single.just(isAtLeastAndroidPie())
     }
   }
 }
