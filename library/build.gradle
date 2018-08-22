@@ -92,6 +92,7 @@ dependencies {
   api deps.rxjava2
   api deps.rxandroid2
   api deps.rxkotlin2
+  implementation deps.supportannotations
   implementation deps.kotlinstdlib
   testImplementation deps.junit
   testImplementation deps.truth
