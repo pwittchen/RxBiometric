@@ -38,9 +38,8 @@ class MainActivity : AppCompatActivity() {
         .setNegativeButton(
             "cancel",
             mainExecutor,
-            DialogInterface.OnClickListener { dialog, _ ->
+            DialogInterface.OnClickListener { _, _ ->
               showMessage("cancel")
-              dialog.dismiss()
             })
         .build()
 
