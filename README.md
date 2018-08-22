@@ -1,3 +1,5 @@
+<p align="center"><img src="biometric.png" alt="biometric" height="250px"></p>
+
 RxBiometric
 ===========
 RxJava bindings for Biometric Prompt on Android (added in Android 9 Pie, API Level 28+)
