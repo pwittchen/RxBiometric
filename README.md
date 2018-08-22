@@ -1,4 +1,4 @@
-<p align="center"><img src="biometric.png" alt="biometric" height="250px"></p>
+<p align="center"><img src="logo.png" alt="logo" height="250px"></p>
 
 RxBiometric
 ===========
