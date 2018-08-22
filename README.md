@@ -2,7 +2,7 @@
 
 RxBiometric
 ===========
-RxJava bindings for Biometric Prompt on Android (added in Android 9 Pie, API Level 28+)
+RxJava and RxKotlin bindings for Biometric Prompt on Android (added in Android 9 Pie, API Level 28+)
 
 *If your app is drawing its own fingerprint auth dialogs, you should switch to using the BiometricPrompt API as soon as possible.*
 
