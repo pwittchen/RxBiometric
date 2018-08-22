@@ -31,16 +31,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     val prompt = BiometricPrompt
-        .Builder(this)
-        .setTitle("title")
-        .setDescription("description")
-        .setNegativeButton(
-            "cancel",
-            mainExecutor,
-            DialogInterface.OnClickListener { _, _ ->
-              showMessage("cancel")
-            })
-        .build()
+      .Builder(this)
+      .setTitle("title")
+      .setDescription("description")
+      .setNegativeButton(
+        "cancel",
+        mainExecutor,
+        DialogInterface.OnClickListener { _, _ ->
+          showMessage("cancel")
+        })
+      .build()
 
     val cancellationSignal = CancellationSignal()
     cancellationSignal.setOnCancelListener {
@@ -49,40 +49,45 @@ class MainActivity : AppCompatActivity() {
 
     button.setOnClickListener {
       prompt.authenticate(
-          cancellationSignal,
-          mainExecutor,
-          object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-              showMessage("success")
-            }
+        cancellationSignal,
+        mainExecutor,
+        object : BiometricPrompt.AuthenticationCallback() {
+          override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+            showMessage("success")
+          }
 
-            override fun onAuthenticationFailed() {
-              super.onAuthenticationFailed()
-              showMessage("fail")
-            }
+          override fun onAuthenticationFailed() {
+            super.onAuthenticationFailed()
+            showMessage("fail")
+          }
 
-            override fun onAuthenticationError(
-              errorCode: Int,
-              errString: CharSequence?
-            ) {
-              super.onAuthenticationError(errorCode, errString)
-              showMessage("error")
-            }
+          override fun onAuthenticationError(
+            errorCode: Int,
+            errString: CharSequence?
+          ) {
+            super.onAuthenticationError(errorCode, errString)
+            showMessage("error")
+          }
 
-            override fun onAuthenticationHelp(
-              helpCode: Int,
-              helpString: CharSequence?
-            ) {
-              super.onAuthenticationHelp(helpCode, helpString)
-              showMessage("help")
-            }
-          })
+          override fun onAuthenticationHelp(
+            helpCode: Int,
+            helpString: CharSequence?
+          ) {
+            super.onAuthenticationHelp(helpCode, helpString)
+            showMessage("help")
+          }
+        })
     }
   }
 
   fun showMessage(message: String) {
-    Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
-        .show()
+    Toast
+      .makeText(
+        this@MainActivity,
+        message,
+        Toast.LENGTH_SHORT
+      )
+      .show()
   }
 
 }
