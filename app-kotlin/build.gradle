@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+  implementation project(':library')
   implementation deps.kotlinstdlib
   implementation deps.appcompatv7
   implementation deps.constraintlayout
