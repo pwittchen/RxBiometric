@@ -40,63 +40,104 @@ class RxBiometric {
     private lateinit var executor: Executor
     private lateinit var cryptoObject: CryptoObject
 
-    fun RxBiometric(
-      title: String,
-      description: String,
-      negativeButtonText: String,
-      negativeButtonListener: DialogInterface.OnClickListener,
-      cancellationSignal: CancellationSignal,
-      executor: Executor,
-      cryptoObject: CryptoObject
-    ) {
-      this.title = title
-      this.description = description
-      this.negativeButtonText = negativeButtonText
-      this.negativeButtonListener = negativeButtonListener
-      this.cancellationSignal = cancellationSignal
-      this.executor = executor
-      this.cryptoObject = cryptoObject
-    }
-
-    //FIXME: methods below are not ready yet - check valid better builder pattern
-    @JvmStatic fun title(title: String): Companion {
-      this.title = title
-      return this
-    }
-
-    @JvmStatic fun description(description: String): Companion {
-      this.description = description
-      return this
-    }
-
-    @JvmStatic fun negativeButton(
-      text: String,
-      listener: DialogInterface.OnClickListener
+    fun create(
+      builder: Builder
     ): Companion {
-      this.negativeButtonText = text
-      this.negativeButtonListener = listener
+      this.title = builder.title
+      this.description = builder.description
+      this.negativeButtonText = builder.negativeButtonText
+      this.negativeButtonListener = builder.negativeButtonListener
+      this.cancellationSignal = builder.cancellationSignal
+      this.executor = builder.executor
+      this.cryptoObject = builder.cryptoObject
       return this
     }
 
-    @JvmStatic fun cancellationSignal(cancellationSignal: CancellationSignal): Companion {
-      this.cancellationSignal = cancellationSignal
-      return this
+    @JvmStatic fun builder(): Builder {
+      return Builder()
     }
 
-    @JvmStatic fun executor(executor: Executor): Companion {
-      this.executor = executor
-      return this
+    @JvmStatic fun title(title: String): Builder {
+      return builder().title(title)
     }
 
-    @JvmStatic fun cryptoObject(cryptoObject: CryptoObject): Companion {
-      this.cryptoObject = cryptoObject
-      return this
+    @JvmStatic fun description(description: String): Builder {
+      return builder().description(description)
+    }
+
+    @JvmStatic fun negativeButtonText(text: String): Builder {
+      return builder().negativeButtonText(text)
+    }
+
+    @JvmStatic fun negativeButtonListener(listener: DialogInterface.OnClickListener): Builder {
+      return builder().negativeButtonListener(listener)
+    }
+
+    @JvmStatic fun cancellationSignal(cancellationSignal: CancellationSignal): Builder {
+      return builder().cancellationSignal(cancellationSignal)
+    }
+
+    @JvmStatic fun executor(executor: Executor): Builder {
+      return builder().executor(executor)
+    }
+
+    @JvmStatic fun cryptoObject(cryptoObject: CryptoObject): Builder {
+      return builder().cryptoObject(cryptoObject)
     }
 
     @JvmStatic fun authenticate(): Completable {
       //TODO: implement and return Completable
       //TODO: implement onError situation
       return Completable.create { emitter -> emitter.onComplete() }
+    }
+
+    class Builder {
+      internal lateinit var title: String
+      internal lateinit var description: String
+      internal lateinit var negativeButtonText: String
+      internal lateinit var negativeButtonListener: DialogInterface.OnClickListener
+      internal lateinit var cancellationSignal: CancellationSignal
+      internal lateinit var executor: Executor
+      internal lateinit var cryptoObject: CryptoObject
+
+      fun title(title: String): Builder {
+        this.title = title
+        return this
+      }
+
+      fun description(description: String): Builder {
+        this.description = description
+        return this
+      }
+
+      fun negativeButtonText(negativeButtonText: String): Builder {
+        this.negativeButtonText = negativeButtonText
+        return this
+      }
+
+      fun negativeButtonListener(negativeButtonListener: DialogInterface.OnClickListener): Builder {
+        this.negativeButtonListener = negativeButtonListener
+        return this
+      }
+
+      fun cancellationSignal(cancellationSignal: CancellationSignal): Builder {
+        this.cancellationSignal = cancellationSignal
+        return this
+      }
+
+      fun executor(executor: Executor): Builder {
+        this.executor = executor
+        return this
+      }
+
+      fun cryptoObject(cryptoObject: CryptoObject): Builder {
+        this.cryptoObject = cryptoObject
+        return this
+      }
+
+      fun build(): Companion {
+        return create(this)
+      }
     }
   }
 }
