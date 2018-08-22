@@ -1,10 +1,13 @@
 package pwittchen.github.com.rxbiometric
 
 import android.content.DialogInterface
+import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
+import android.os.Build
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.os.CancellationSignal
+import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -18,6 +21,17 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
+
+
+    if (!isAtLeastAndroidPie()) {
+      showMessage("need at least Android Pie")
+      return
+    }
+
+    if (!hasBiometricSupport()) {
+      showMessage("no biometric support")
+      return
+    }
 
     val prompt = BiometricPrompt
         .Builder(this)
@@ -68,6 +82,16 @@ class MainActivity : AppCompatActivity() {
             }
           })
     }
+  }
+
+  @RequiresApi(VERSION_CODES.M)
+  private fun hasBiometricSupport(): Boolean {
+    val packageManager = this.packageManager
+    return packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+  }
+
+  fun isAtLeastAndroidPie(): Boolean {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
   }
 
   fun showMessage(message: String) {
