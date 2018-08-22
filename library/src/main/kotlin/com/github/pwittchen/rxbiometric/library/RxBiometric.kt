@@ -1,8 +1,11 @@
 package com.github.pwittchen.rxbiometric.library
 
+import android.content.Context
 import android.content.DialogInterface
+import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.CryptoObject
 import android.os.CancellationSignal
+import android.support.annotation.RequiresApi
 import io.reactivex.Completable
 import java.util.concurrent.Executor
 
@@ -83,6 +86,20 @@ class RxBiometric {
 
     @JvmStatic fun cryptoObject(cryptoObject: CryptoObject): Builder {
       return builder().cryptoObject(cryptoObject)
+    }
+
+    @RequiresApi(28)
+    fun createPrompt(context: Context): BiometricPrompt {
+      return BiometricPrompt
+        .Builder(context)
+        .setTitle(title)
+        .setDescription(description)
+        .setNegativeButton(
+          negativeButtonText,
+          executor,
+          negativeButtonListener
+        )
+        .build()
     }
 
     @JvmStatic fun authenticate(): Completable {
