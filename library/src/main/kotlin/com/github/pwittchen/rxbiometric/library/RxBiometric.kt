@@ -3,34 +3,17 @@ package com.github.pwittchen.rxbiometric.library
 import android.content.Context
 import android.content.DialogInterface
 import android.hardware.biometrics.BiometricPrompt
-import android.hardware.biometrics.BiometricPrompt.CryptoObject
+import android.hardware.biometrics.BiometricPrompt.AuthenticationResult
+import android.os.Build
 import android.os.CancellationSignal
 import android.support.annotation.RequiresApi
+import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
+import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
+import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
 import io.reactivex.Completable
 import java.util.concurrent.Executor
 
-//TODO #1: implement empty methods
-//TODO #2: apply better builder pattern
-//TODO #3: create RxJava flowable
-//TODO #4: test everything in Java and Kotlin
-//TODO #5: write unit tests
-
-/*
-
-API I want to achieve:
-
-RxBiometric
-  .title("title")
-  .description("description")
-  .negativeButton(...)
-  .cancellationSignal(...)
-  .executor(...)
-  .cryptoObject(...) <- this is optional
-  .authenticate()
-  .subscribe { ... }
-
-*/
-
+//TODO: add unit tests
 class RxBiometric {
 
   companion object {
@@ -41,9 +24,8 @@ class RxBiometric {
     private lateinit var negativeButtonListener: DialogInterface.OnClickListener
     private lateinit var cancellationSignal: CancellationSignal
     private lateinit var executor: Executor
-    private lateinit var cryptoObject: CryptoObject
 
-    fun create(
+    @JvmStatic fun create(
       builder: Builder
     ): Companion {
       this.title = builder.title
@@ -52,7 +34,6 @@ class RxBiometric {
       this.negativeButtonListener = builder.negativeButtonListener
       this.cancellationSignal = builder.cancellationSignal
       this.executor = builder.executor
-      this.cryptoObject = builder.cryptoObject
       return this
     }
 
@@ -84,11 +65,7 @@ class RxBiometric {
       return builder().executor(executor)
     }
 
-    @JvmStatic fun cryptoObject(cryptoObject: CryptoObject): Builder {
-      return builder().cryptoObject(cryptoObject)
-    }
-
-    @RequiresApi(28)
+    @RequiresApi(Build.VERSION_CODES.P)
     fun createPrompt(context: Context): BiometricPrompt {
       return BiometricPrompt
         .Builder(context)
@@ -102,10 +79,39 @@ class RxBiometric {
         .build()
     }
 
-    @JvmStatic fun authenticate(): Completable {
-      //TODO: implement and return Completable
-      //TODO: implement onError situation
-      return Completable.create { emitter -> emitter.onComplete() }
+    @RequiresApi(Build.VERSION_CODES.P) @JvmStatic fun authenticate(context: Context): Completable {
+      return Completable.create {
+        createPrompt(context).authenticate(
+          cancellationSignal,
+          executor,
+          object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: AuthenticationResult?) {
+              super.onAuthenticationSucceeded(result)
+              it.onComplete()
+            }
+
+            override fun onAuthenticationFailed() {
+              super.onAuthenticationFailed()
+              it.onError(AuthenticationFail())
+            }
+
+            override fun onAuthenticationError(
+              errorCode: Int,
+              errorMessage: CharSequence?
+            ) {
+              super.onAuthenticationError(errorCode, errorMessage)
+              it.onError(AuthenticationError(errorCode, errorMessage))
+            }
+
+            override fun onAuthenticationHelp(
+              helpCode: Int,
+              helpMessage: CharSequence?
+            ) {
+              super.onAuthenticationHelp(helpCode, helpMessage)
+              it.onError(AuthenticationHelp(helpCode, helpMessage))
+            }
+          })
+      }
     }
 
     class Builder {
@@ -115,7 +121,6 @@ class RxBiometric {
       internal lateinit var negativeButtonListener: DialogInterface.OnClickListener
       internal lateinit var cancellationSignal: CancellationSignal
       internal lateinit var executor: Executor
-      internal lateinit var cryptoObject: CryptoObject
 
       fun title(title: String): Builder {
         this.title = title
@@ -144,11 +149,6 @@ class RxBiometric {
 
       fun executor(executor: Executor): Builder {
         this.executor = executor
-        return this
-      }
-
-      fun cryptoObject(cryptoObject: CryptoObject): Builder {
-        this.cryptoObject = cryptoObject
         return this
       }
 

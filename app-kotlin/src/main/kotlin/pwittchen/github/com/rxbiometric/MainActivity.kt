@@ -1,17 +1,23 @@
 package pwittchen.github.com.rxbiometric
 
 import android.content.DialogInterface
-import android.hardware.biometrics.BiometricPrompt
 import android.os.Bundle
 import android.os.CancellationSignal
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.github.pwittchen.rxbiometric.library.Preconditions
+import com.github.pwittchen.rxbiometric.library.RxBiometric
+import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
+import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_main.button
 
-//TODO: temporary solution for testing purposes to be extracted to the library
+//TODO #1: test it
+//TODO #2: remove commented code
 class MainActivity : AppCompatActivity() {
 
   @RequiresApi(28)
@@ -30,57 +36,88 @@ class MainActivity : AppCompatActivity() {
       return
     }
 
-    val prompt = BiometricPrompt
-      .Builder(this)
-      .setTitle("title")
-      .setDescription("description")
-      .setNegativeButton(
-        "cancel",
-        mainExecutor,
-        DialogInterface.OnClickListener { _, _ ->
-          showMessage("cancel")
-        })
-      .build()
-
+//    val prompt = BiometricPrompt
+//      .Builder(this)
+//      .setTitle("title")
+//      .setDescription("description")
+//      .setNegativeButton(
+//        "cancel",
+//        mainExecutor,
+//        DialogInterface.OnClickListener { _, _ ->
+//          showMessage("cancel")
+//        })
+//      .build()
+//
     val cancellationSignal = CancellationSignal()
     cancellationSignal.setOnCancelListener {
       showMessage("cancellation signal")
     }
+//
+//    button.setOnClickListener {
+//      prompt.authenticate(
+//        cancellationSignal,
+//        mainExecutor,
+//        object : BiometricPrompt.AuthenticationCallback() {
+//          override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
+//            showMessage("success")
+//          }
+//
+//          override fun onAuthenticationFailed() {
+//            super.onAuthenticationFailed()
+//            showMessage("fail")
+//          }
+//
+//          override fun onAuthenticationError(
+//            errorCode: Int,
+//            errString: CharSequence?
+//          ) {
+//            super.onAuthenticationError(errorCode, errString)
+//            showMessage("error")
+//          }
+//
+//          override fun onAuthenticationHelp(
+//            helpCode: Int,
+//            helpString: CharSequence?
+//          ) {
+//            super.onAuthenticationHelp(helpCode, helpString)
+//            showMessage("help")
+//          }
+//        })
+//    }
 
     button.setOnClickListener {
-      prompt.authenticate(
-        cancellationSignal,
-        mainExecutor,
-        object : BiometricPrompt.AuthenticationCallback() {
-          override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
-            showMessage("success")
-          }
 
-          override fun onAuthenticationFailed() {
-            super.onAuthenticationFailed()
-            showMessage("fail")
-          }
-
-          override fun onAuthenticationError(
-            errorCode: Int,
-            errString: CharSequence?
-          ) {
-            super.onAuthenticationError(errorCode, errString)
-            showMessage("error")
-          }
-
-          override fun onAuthenticationHelp(
-            helpCode: Int,
-            helpString: CharSequence?
-          ) {
-            super.onAuthenticationHelp(helpCode, helpString)
-            showMessage("help")
-          }
+      RxBiometric
+        .title("title")
+        .description("description")
+        .negativeButtonText("cancel")
+        .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
+          showMessage("cancel")
         })
+        .cancellationSignal(cancellationSignal)
+        .executor(mainExecutor)
+        .build()
+        .authenticate(this)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeBy(
+          onComplete = {
+            showMessage("authenticated!")
+          },
+          onError = {
+            when (it) {
+              is AuthenticationFail -> showMessage("fail")
+              is AuthenticationHelp -> showMessage("help")
+              else -> showMessage("error")
+            }
+          }
+        )
+
     }
+
   }
 
-  fun showMessage(message: String) {
+  private fun showMessage(message: String) {
     Toast
       .makeText(
         this@MainActivity,
