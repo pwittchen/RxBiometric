@@ -1,6 +1,6 @@
 <p align="center"><img src="logo.png" alt="logo" height="250px"></p>
 
-RxBiometric [![Build Status](https://travis-ci.org/pwittchen/RxBiometric.svg?branch=master)](https://travis-ci.org/pwittchen/RxBiometric)
+RxBiometric [![Build Status](https://travis-ci.org/pwittchen/RxBiometric.svg?branch=master)](https://travis-ci.org/pwittchen/RxBiometric)  ![Maven Central](https://img.shields.io/maven-central/v/com.github.pwittchen/rxbiometric.svg?style=flat)
 ===========
 RxJava and RxKotlin bindings for Biometric Prompt on Android (added in Android 9 Pie, API Level 28+)
 
