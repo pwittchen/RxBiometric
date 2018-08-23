@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.pwittchen.rxbiometric.library">
-
-  <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-
-</manifest>

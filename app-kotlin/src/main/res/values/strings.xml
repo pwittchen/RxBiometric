@@ -1,5 +1,0 @@
-<resources>
-  <string name="app_name">RxBiometric</string>
-  <string name="title_activity_main">MainActivity</string>
-  <string name="authenticate">authenticate</string>
-</resources>

@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RxBiometric - library</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">library</a>&nbsp;/&nbsp;<a href="../index.html">com.github.pwittchen.rxbiometric.library</a>&nbsp;/&nbsp;<a href="./index.html">RxBiometric</a><br/>
+<br/>
+<h1>RxBiometric</h1>
+<code><span class="keyword">class </span><span class="identifier">RxBiometric</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">RxBiometric</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="authenticate.html">authenticate</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">authenticate</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$authenticate(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">Context</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Completable</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">authenticate</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$authenticate(android.content.Context, android.hardware.biometrics.BiometricPrompt.CryptoObject)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">Context</span><span class="symbol">, </span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$authenticate(android.content.Context, android.hardware.biometrics.BiometricPrompt.CryptoObject)/cryptoObject">cryptoObject</span><span class="symbol">:</span>&nbsp;<span class="identifier">CryptoObject</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Completable</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="builder.html">builder</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">builder</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="cancellation-signal.html">cancellationSignal</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cancellationSignal</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$cancellationSignal(android.os.CancellationSignal)/cancellationSignal">cancellationSignal</span><span class="symbol">:</span>&nbsp;<span class="identifier">CancellationSignal</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="create.html">create</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$create(com.github.pwittchen.rxbiometric.library.RxBiometricBuilder)/builder">builder</span><span class="symbol">:</span>&nbsp;<a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">RxBiometric.Companion</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="create-authentication-callback.html">createAuthenticationCallback</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">createAuthenticationCallback</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$createAuthenticationCallback(io.reactivex.CompletableEmitter)/emitter">emitter</span><span class="symbol">:</span>&nbsp;<span class="identifier">CompletableEmitter</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">AuthenticationCallback</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="create-prompt.html">createPrompt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">createPrompt</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$createPrompt(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">Context</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">BiometricPrompt</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="description.html">description</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">description</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$description(kotlin.String)/description">description</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="executor.html">executor</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">executor</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$executor(java.util.concurrent.Executor)/executor">executor</span><span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/Executor.html"><span class="identifier">Executor</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="negative-button-listener.html">negativeButtonListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">negativeButtonListener</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$negativeButtonListener(android.content.DialogInterface.OnClickListener)/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="identifier">OnClickListener</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="negative-button-text.html">negativeButtonText</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">negativeButtonText</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$negativeButtonText(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="title.html">title</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">title</span><span class="symbol">(</span><span class="identifier" id="com.github.pwittchen.rxbiometric.library.RxBiometric.Companion$title(kotlin.String)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-rx-biometric-builder/index.html"><span class="identifier">RxBiometricBuilder</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
