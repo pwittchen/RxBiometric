@@ -8,6 +8,21 @@ RxJava and RxKotlin bindings for Biometric Prompt on Android (added in Android 9
 
 It's an official statement from [Google Android Developers Blog](https://android-developers.googleblog.com/2018/08/introducing-android-9-pie.html). RxBiometric helps you to do that via RxJava stream!
 
+Contents
+--------
+
+- [Usage](#usage)
+- [Examples](#examples)
+- [Download](#download)
+- [Tests](#tests)
+- [Code style](#code-style)
+- [Static code analysis](#static-code-analysis)
+- [JavaDoc](#javadoc)
+- [Changelog](#changelog)
+- [Releasing](#releasing)
+- [References](#references)
+- [License](#license)
+
 Usage
 -----
 
