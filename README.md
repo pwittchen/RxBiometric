@@ -93,6 +93,8 @@ RxPreconditions
   )
 ```
 
+If you want to create your own CryptoObject and use it during authentication, then you can call `authenticate(context, cryptoObject)` method instead of `authenticate(context)`.
+
 Of course, **don't forget to dispose** `Disposable` appropriately in the Activity Lifecycle.
 
 Library can be used in the **Java** projects as well. Idea is the same, just syntax will be a bit different.
