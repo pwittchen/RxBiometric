@@ -93,9 +93,9 @@ RxPreconditions
   )
 ```
 
-Of course, **don't forget to dispose** Disposable appropriately in the Activity Lifecycle.
+Of course, **don't forget to dispose** `Disposable` appropriately in the Activity Lifecycle.
 
-Library can be used in the **java** projects as well. Idea is the same, just syntax will be a bit different.
+Library can be used in the **Java** projects as well. Idea is the same, just syntax will be a bit different.
 
 Examples
 --------
