@@ -107,7 +107,13 @@ Complete example of the working application can be found in the `kotlin-app` dir
 Download
 --------
 
-TBD.
+You can depend on the library through Gradle:
+
+```groovy
+dependencies {
+  implementation 'com.github.pwittchen:rxbiometric:0.0.1'
+}
+```
 
 Tests
 -----
