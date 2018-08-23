@@ -24,7 +24,7 @@ RxBiometric
   .cancellationSignal(cancellationSignal)
   .executor(mainExecutor)
   .build()
-  .authenticate(this)
+  .authenticate(context)
   .subscribeOn(Schedulers.io())
   .observeOn(AndroidSchedulers.mainThread())
   .subscribeBy(
@@ -46,7 +46,7 @@ which you can use to create fluent data flow like in the example below
 
 ```kotlin
 RxPreconditions
-  .canHandleBiometric(this)
+  .canHandleBiometric(context)
   .flatMapCompletable {
     if (!it) Completable.error(BiometricNotSupported())
     else
@@ -60,7 +60,7 @@ RxPreconditions
         .cancellationSignal(CancellationSignal())
         .executor(mainExecutor)
         .build()
-        .authenticate(this)
+        .authenticate(context)
   }
   .subscribeOn(Schedulers.io())
   .observeOn(AndroidSchedulers.mainThread())
