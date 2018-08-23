@@ -28,8 +28,9 @@ class RxBiometric {
     private lateinit var cancellationSignal: CancellationSignal
     private lateinit var executor: Executor
 
-    @JvmStatic fun create(
-      builder: Builder
+    @JvmStatic
+    fun create(
+      builder: RxBiometricBuilder
     ): Companion {
       this.title = builder.title
       this.description = builder.description
@@ -40,31 +41,36 @@ class RxBiometric {
       return this
     }
 
-    @JvmStatic fun builder(): Builder {
-      return Builder()
+    @JvmStatic
+    fun builder(): RxBiometricBuilder {
+      return RxBiometricBuilder()
     }
 
-    @JvmStatic fun title(title: String): Builder {
+    @JvmStatic
+    fun title(title: String): RxBiometricBuilder {
       return builder().title(title)
     }
 
-    @JvmStatic fun description(description: String): Builder {
+    @JvmStatic
+    fun description(description: String): RxBiometricBuilder {
       return builder().description(description)
     }
 
-    @JvmStatic fun negativeButtonText(text: String): Builder {
+    @JvmStatic
+    fun negativeButtonText(text: String): RxBiometricBuilder {
       return builder().negativeButtonText(text)
     }
 
-    @JvmStatic fun negativeButtonListener(listener: DialogInterface.OnClickListener): Builder {
+    @JvmStatic
+    fun negativeButtonListener(listener: DialogInterface.OnClickListener): RxBiometricBuilder {
       return builder().negativeButtonListener(listener)
     }
 
-    @JvmStatic fun cancellationSignal(cancellationSignal: CancellationSignal): Builder {
+    @JvmStatic fun cancellationSignal(cancellationSignal: CancellationSignal): RxBiometricBuilder {
       return builder().cancellationSignal(cancellationSignal)
     }
 
-    @JvmStatic fun executor(executor: Executor): Builder {
+    @JvmStatic fun executor(executor: Executor): RxBiometricBuilder {
       return builder().executor(executor)
     }
 
@@ -120,7 +126,7 @@ class RxBiometric {
 
         override fun onAuthenticationFailed() {
           super.onAuthenticationFailed()
-          it.onError(AuthenticationFail())
+          it.tryOnError(AuthenticationFail())
         }
 
         override fun onAuthenticationError(
@@ -128,7 +134,7 @@ class RxBiometric {
           errorMessage: CharSequence?
         ) {
           super.onAuthenticationError(errorCode, errorMessage)
-          it.onError(AuthenticationError(errorCode, errorMessage))
+          it.tryOnError(AuthenticationError(errorCode, errorMessage))
         }
 
         override fun onAuthenticationHelp(
@@ -136,7 +142,7 @@ class RxBiometric {
           helpMessage: CharSequence?
         ) {
           super.onAuthenticationHelp(helpCode, helpMessage)
-          it.onError(AuthenticationHelp(helpCode, helpMessage))
+          it.tryOnError(AuthenticationHelp(helpCode, helpMessage))
         }
       }
     }

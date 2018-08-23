@@ -13,5 +13,12 @@ class RxPreconditions {
     @JvmStatic fun isAtLeastAndroidPie(): Single<Boolean> {
       return Single.just(Preconditions.isAtLeastAndroidPie())
     }
+
+    @JvmStatic fun canHandleBiometric(context: Context): Single<Boolean> {
+      return hasBiometricSupport(context).flatMap { it ->
+        if (it) isAtLeastAndroidPie()
+        else Single.just(false)
+      }
+    }
   }
 }

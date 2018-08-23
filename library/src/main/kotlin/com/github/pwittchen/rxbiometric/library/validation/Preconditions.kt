@@ -13,5 +13,9 @@ class Preconditions {
     @JvmStatic fun isAtLeastAndroidPie(): Boolean {
       return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
     }
+
+    @JvmStatic fun canHandleBiometric(context: Context): Boolean {
+      return hasBiometricSupport(context) && isAtLeastAndroidPie()
+    }
   }
 }

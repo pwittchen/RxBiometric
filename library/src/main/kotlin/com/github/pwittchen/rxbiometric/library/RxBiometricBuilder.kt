@@ -5,7 +5,7 @@ import android.os.CancellationSignal
 import com.github.pwittchen.rxbiometric.library.RxBiometric.Companion
 import java.util.concurrent.Executor
 
-class Builder {
+class RxBiometricBuilder {
   internal lateinit var title: String
   internal lateinit var description: String
   internal lateinit var negativeButtonText: String
@@ -13,32 +13,32 @@ class Builder {
   internal lateinit var cancellationSignal: CancellationSignal
   internal lateinit var executor: Executor
 
-  fun title(title: String): Builder {
+  fun title(title: String): RxBiometricBuilder {
     this.title = title
     return this
   }
 
-  fun description(description: String): Builder {
+  fun description(description: String): RxBiometricBuilder {
     this.description = description
     return this
   }
 
-  fun negativeButtonText(negativeButtonText: String): Builder {
+  fun negativeButtonText(negativeButtonText: String): RxBiometricBuilder {
     this.negativeButtonText = negativeButtonText
     return this
   }
 
-  fun negativeButtonListener(negativeButtonListener: DialogInterface.OnClickListener): Builder {
+  fun negativeButtonListener(negativeButtonListener: DialogInterface.OnClickListener): RxBiometricBuilder {
     this.negativeButtonListener = negativeButtonListener
     return this
   }
 
-  fun cancellationSignal(cancellationSignal: CancellationSignal): Builder {
+  fun cancellationSignal(cancellationSignal: CancellationSignal): RxBiometricBuilder {
     this.cancellationSignal = cancellationSignal
     return this
   }
 
-  fun executor(executor: Executor): Builder {
+  fun executor(executor: Executor): RxBiometricBuilder {
     this.executor = executor
     return this
   }
