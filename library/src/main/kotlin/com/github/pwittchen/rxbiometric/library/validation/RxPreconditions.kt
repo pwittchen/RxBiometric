@@ -5,7 +5,6 @@ import io.reactivex.Single
 
 class RxPreconditions {
   companion object {
-
     @JvmStatic fun hasBiometricSupport(context: Context): Single<Boolean> {
       return Single.just(Preconditions.hasBiometricSupport(context))
     }

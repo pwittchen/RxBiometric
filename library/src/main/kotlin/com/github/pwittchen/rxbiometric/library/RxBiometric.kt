@@ -13,9 +13,7 @@ import io.reactivex.CompletableEmitter
 import java.util.concurrent.Executor
 
 class RxBiometric {
-
   companion object {
-
     private lateinit var title: String
     private lateinit var description: String
     private lateinit var negativeButtonText: String
