@@ -4,19 +4,14 @@ import android.content.Context
 import android.content.DialogInterface
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-import android.hardware.biometrics.BiometricPrompt.AuthenticationResult
 import android.hardware.biometrics.BiometricPrompt.CryptoObject
 import android.os.Build
 import android.os.CancellationSignal
 import android.support.annotation.RequiresApi
-import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
-import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
-import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
 import java.util.concurrent.Executor
 
-//TODO: add unit tests
 class RxBiometric {
 
   companion object {
@@ -117,34 +112,8 @@ class RxBiometric {
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
-    fun createAuthenticationCallback(it: CompletableEmitter): AuthenticationCallback {
-      return object : AuthenticationCallback() {
-        override fun onAuthenticationSucceeded(result: AuthenticationResult?) {
-          super.onAuthenticationSucceeded(result)
-          it.onComplete()
-        }
-
-        override fun onAuthenticationFailed() {
-          super.onAuthenticationFailed()
-          it.tryOnError(AuthenticationFail())
-        }
-
-        override fun onAuthenticationError(
-          errorCode: Int,
-          errorMessage: CharSequence?
-        ) {
-          super.onAuthenticationError(errorCode, errorMessage)
-          it.tryOnError(AuthenticationError(errorCode, errorMessage))
-        }
-
-        override fun onAuthenticationHelp(
-          helpCode: Int,
-          helpMessage: CharSequence?
-        ) {
-          super.onAuthenticationHelp(helpCode, helpMessage)
-          it.tryOnError(AuthenticationHelp(helpCode, helpMessage))
-        }
-      }
+    fun createAuthenticationCallback(emitter: CompletableEmitter): AuthenticationCallback {
+      return Authentication().createAuthenticationCallback(emitter)
     }
   }
 }
