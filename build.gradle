@@ -24,6 +24,7 @@ ext.deps = [
               mockitokotlin       : 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1',
               dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.17',
               detekt              : "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion",
+              kotlintest          : 'io.kotlintest:kotlintest-runner-junit5:3.1.7',
               ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
               kotlinx             : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
               kotlinstdlib        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
