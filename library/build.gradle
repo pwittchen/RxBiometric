@@ -96,6 +96,7 @@ dependencies {
   testImplementation deps.junit
   testImplementation deps.truth
   testImplementation deps.robolectric
+  testImplementation deps.kotlintest
   testImplementation deps.mockitokotlin
   testImplementation deps.mockitocore
 }
@@ -117,6 +118,12 @@ buildscript {
     classpath deps.dokka
   }
 }
+
 repositories {
   mavenCentral()
+  jcenter()
+  google()
+  maven {
+    url 'https://plugins.gradle.org/m2/'
+  }
 }

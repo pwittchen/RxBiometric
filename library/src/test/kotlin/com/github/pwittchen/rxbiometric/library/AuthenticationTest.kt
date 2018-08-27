@@ -20,27 +20,19 @@ import android.hardware.biometrics.BiometricPrompt.AuthenticationResult
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
+import io.kotlintest.specs.StringSpec
 import io.reactivex.CompletableEmitter
-import org.junit.Before
-import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 
-class AuthenticationTest {
+class AuthenticationTest : StringSpec({
+  val emitter: CompletableEmitter = mock(CompletableEmitter::class.java)
+  val authentication: Authentication = spy(Authentication())
+  val callback: AuthenticationCallback = authentication.createAuthenticationCallback(emitter)
 
-  private lateinit var emitter: CompletableEmitter
-  private lateinit var authentication: Authentication
-  private lateinit var callback: AuthenticationCallback
-
-  @Before fun setUp() {
-    emitter = mock(CompletableEmitter::class.java)
-    authentication = spy(Authentication())
-    callback = authentication.createAuthenticationCallback(emitter)
-  }
-
-  @Test fun shouldCompleteOnAuthenticationSucceeded() {
+  "shouldCompleteOnAuthenticationSucceeded" {
     // given
     val result: AuthenticationResult = mock(AuthenticationResult::class.java)
 
@@ -51,7 +43,7 @@ class AuthenticationTest {
     verify(emitter).onComplete()
   }
 
-  @Test fun shouldTryOnErrorOnAuthenticationFailed() {
+  "shouldTryOnErrorOnAuthenticationFailed" {
     // when
     callback.onAuthenticationFailed()
 
@@ -59,7 +51,7 @@ class AuthenticationTest {
     verify(emitter).tryOnError(any(AuthenticationFail::class.java))
   }
 
-  @Test fun shouldTryOnErrorOnAuthenticationError() {
+  "shouldTryOnErrorOnAuthenticationError" {
     // when
     callback.onAuthenticationError(1, "error occurred")
 
@@ -67,11 +59,11 @@ class AuthenticationTest {
     verify(emitter).tryOnError(any(AuthenticationError::class.java))
   }
 
-  @Test fun shouldTryOnErrorOnAuthenticationHelp() {
+  "shouldTryOnErrorOnAuthenticationHelp" {
     // when
     callback.onAuthenticationHelp(2, "help needed")
 
     // then
     verify(emitter).tryOnError(any(AuthenticationHelp::class.java))
   }
-}
+})
