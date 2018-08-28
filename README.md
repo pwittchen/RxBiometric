@@ -1,6 +1,6 @@
 <p align="center"><img src="logo.png" alt="logo" height="250px"></p>
 
-RxBiometric [![Build Status](https://travis-ci.org/pwittchen/RxBiometric.svg?branch=master)](https://travis-ci.org/pwittchen/RxBiometric)  ![Maven Central](https://img.shields.io/maven-central/v/com.github.pwittchen/rxbiometric.svg?style=flat)
+RxBiometric [![Build Status](https://img.shields.io/travis/pwittchen/RxBiometric.svg?branch=master&style=flat-square)](https://travis-ci.org/pwittchen/RxBiometric)  ![Maven Central](https://img.shields.io/maven-central/v/com.github.pwittchen/rxbiometric.svg?style=flat-square)
 ===========
 RxJava and RxKotlin bindings for Biometric Prompt (Fingerprint Scanner) on Android (added in Android 9 Pie, API Level 28+)
 
