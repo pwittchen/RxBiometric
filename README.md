@@ -20,6 +20,7 @@ Contents
 - [JavaDoc](#javadoc)
 - [Changelog](#changelog)
 - [Releasing](#releasing)
+- [Mentions](#mentions)
 - [References](#references)
 - [License](#license)
 
@@ -162,6 +163,10 @@ Releasing
 ---------
 
 See [RELEASING.md](https://github.com/pwittchen/RxBiometric/blob/master/RELEASING.md) file.
+
+Mentions
+--------
+- [Android Weekly - issue #324](https://androidweekly.net/issues/issue-324)
 
 References
 ----------
