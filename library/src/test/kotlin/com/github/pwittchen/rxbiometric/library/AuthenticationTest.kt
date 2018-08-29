@@ -29,7 +29,6 @@ import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 
 class AuthenticationTest {
-
   private lateinit var emitter: CompletableEmitter
   private lateinit var authentication: Authentication
   private lateinit var callback: AuthenticationCallback
@@ -74,5 +73,4 @@ class AuthenticationTest {
     // then
     verify(emitter).tryOnError(any(AuthenticationHelp::class.java))
   }
-
 }
