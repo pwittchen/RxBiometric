@@ -167,6 +167,7 @@ See [RELEASING.md](https://github.com/pwittchen/RxBiometric/blob/master/RELEASIN
 Mentions
 --------
 - [Android Weekly - issue #324](https://androidweekly.net/issues/issue-324)
+- [Android Weekly China - issue #194](https://androidweekly.cn/android-dev-weekly-issue-194/)
 
 References
 ----------
