@@ -168,6 +168,7 @@ Mentions
 --------
 - [Android Weekly - issue #324](https://androidweekly.net/issues/issue-324)
 - [Android Weekly China - issue #194](https://androidweekly.cn/android-dev-weekly-issue-194/)
+- [30 summertime libraries which you don't want to miss in 2018](https://medium.com/@mmbialas/30-summertime-android-libraries-and-tools-which-you-dont-want-to-miss-in-2018-fab053d69503)
 
 References
 ----------
