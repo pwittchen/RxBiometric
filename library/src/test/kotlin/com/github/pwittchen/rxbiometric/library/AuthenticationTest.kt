@@ -15,8 +15,8 @@
  */
 package com.github.pwittchen.rxbiometric.library
 
-import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-import android.hardware.biometrics.BiometricPrompt.AuthenticationResult
+import androidx.biometric.BiometricPrompt.AuthenticationCallback
+import androidx.biometric.BiometricPrompt.AuthenticationResult
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp

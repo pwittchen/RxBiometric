@@ -19,9 +19,10 @@ import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
-import android.support.annotation.RequiresApi
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.github.pwittchen.rxbiometric.library.RxBiometric
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
@@ -38,7 +39,7 @@ import kotlinx.android.synthetic.main.content_main.button
 
 class MainActivity : AppCompatActivity() {
 
-  private lateinit var disposable: Disposable
+  private var disposable: Disposable? = null
 
   @RequiresApi(Build.VERSION_CODES.P)
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,23 +49,17 @@ class MainActivity : AppCompatActivity() {
 
 
     button.setOnClickListener { _ ->
-      disposable = RxPreconditions
-        .canHandleBiometric(this)
-        .flatMapCompletable {
-          if (!it) Completable.error(BiometricNotSupported())
-          else
-            RxBiometric
-              .title("title")
-              .description("description")
-              .negativeButtonText("cancel")
-              .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
-                showMessage("cancel")
-              })
-              .cancellationSignal(CancellationSignal())
-              .executor(mainExecutor)
-              .build()
-              .authenticate(this)
-        }
+      disposable = RxBiometric
+        .title("title")
+        .description("description")
+        .negativeButtonText("cancel")
+        .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
+          showMessage("cancel")
+        })
+        .cancellationSignal(CancellationSignal())
+        .executor(ActivityCompat.getMainExecutor(this@MainActivity))
+        .build()
+        .authenticate(this)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeBy(
@@ -75,7 +70,10 @@ class MainActivity : AppCompatActivity() {
               is AuthenticationFail -> showMessage("fail")
               is AuthenticationHelp -> showMessage("help")
               is BiometricNotSupported -> showMessage("biometric not supported")
-              else -> showMessage("other error")
+              else -> {
+                it.printStackTrace()
+                showMessage("other error")
+              }
             }
           }
         )
@@ -84,8 +82,10 @@ class MainActivity : AppCompatActivity() {
 
   override fun onPause() {
     super.onPause()
-    if (!disposable.isDisposed) {
-      disposable.dispose()
+    disposable?.let{
+      if(!it.isDisposed){
+        it.dispose()
+      }
     }
   }
 

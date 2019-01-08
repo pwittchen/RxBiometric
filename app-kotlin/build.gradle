@@ -36,9 +36,9 @@ android {
 dependencies {
   implementation project(':library')
   implementation deps.kotlinstdlib
-  implementation deps.appcompatv7
-  implementation deps.constraintlayout
-  implementation deps.design
+  implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+  implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+  implementation 'com.google.android.material:material:1.1.0-alpha02'
 }
 
 buildscript {

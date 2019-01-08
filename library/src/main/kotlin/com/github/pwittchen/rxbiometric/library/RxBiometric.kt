@@ -17,14 +17,16 @@ package com.github.pwittchen.rxbiometric.library
 
 import android.content.Context
 import android.content.DialogInterface
-import android.hardware.biometrics.BiometricPrompt
-import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-import android.hardware.biometrics.BiometricPrompt.CryptoObject
+import androidx.biometric.BiometricPrompt
+import androidx.biometric.BiometricPrompt.AuthenticationCallback
+import androidx.biometric.BiometricPrompt.CryptoObject
 import android.os.Build
 import android.os.CancellationSignal
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentActivity
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.Executor
 
 class RxBiometric {
@@ -35,6 +37,7 @@ class RxBiometric {
     private lateinit var negativeButtonListener: DialogInterface.OnClickListener
     private lateinit var cancellationSignal: CancellationSignal
     private lateinit var executor: Executor
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     @JvmStatic
     fun create(
@@ -46,6 +49,10 @@ class RxBiometric {
       this.negativeButtonListener = builder.negativeButtonListener
       this.cancellationSignal = builder.cancellationSignal
       this.executor = builder.executor
+      this.promptInfo = BiometricPrompt.PromptInfo.Builder()
+        .setTitle(title)
+        .setDescription(description)
+        .setNegativeButtonText(negativeButtonText).build()
       return this
     }
 
@@ -83,48 +90,31 @@ class RxBiometric {
     }
 
     @JvmStatic
-    @RequiresApi(Build.VERSION_CODES.P)
-    fun authenticate(context: Context): Completable {
-      return Completable.create {
-        createPrompt(context).authenticate(
-          cancellationSignal,
-          executor,
-          createAuthenticationCallback(it)
+    fun authenticate(activity: FragmentActivity): Completable {
+      return Completable.create { emitter ->
+        createPrompt(activity,emitter).authenticate(
+          promptInfo
         )
-      }
+      }.subscribeOn(AndroidSchedulers.mainThread())
     }
 
     @JvmStatic
-    @RequiresApi(Build.VERSION_CODES.P)
     fun authenticate(
-      context: Context,
+      activity: FragmentActivity,
       cryptoObject: CryptoObject
     ): Completable {
-      return Completable.create {
-        createPrompt(context).authenticate(
-          cryptoObject,
-          cancellationSignal,
-          executor,
-          createAuthenticationCallback(it)
+      return Completable.create { emitter ->
+        createPrompt(activity, emitter).authenticate(
+          promptInfo,
+          cryptoObject
         )
-      }
+      }.subscribeOn(AndroidSchedulers.mainThread())
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    fun createPrompt(context: Context): BiometricPrompt {
-      return BiometricPrompt
-        .Builder(context)
-        .setTitle(title)
-        .setDescription(description)
-        .setNegativeButton(
-          negativeButtonText,
-          executor,
-          negativeButtonListener
-        )
-        .build()
+    fun createPrompt(activity: FragmentActivity, emitter: CompletableEmitter): BiometricPrompt {
+      return BiometricPrompt(activity, executor, createAuthenticationCallback(emitter))
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
     fun createAuthenticationCallback(emitter: CompletableEmitter): AuthenticationCallback {
       return Authentication().createAuthenticationCallback(emitter)
     }

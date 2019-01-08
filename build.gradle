@@ -26,7 +26,8 @@ ext.deps = [
               ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
               kotlinx             : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
               kotlinstdlib        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-              kotlingradleplugin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"]
+              kotlingradleplugin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+              biometrics          : "androidx.biometric:biometric:1.0.0-alpha03"]
 
 buildscript {
   repositories {
