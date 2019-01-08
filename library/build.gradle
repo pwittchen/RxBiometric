@@ -11,7 +11,7 @@ apply from: '../maven_push.gradle'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+  buildToolsVersion '28.0.3'
 
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
