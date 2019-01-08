@@ -16,7 +16,6 @@
 package com.github.pwittchen.rxbiometric.library
 
 import android.content.DialogInterface
-import android.os.CancellationSignal
 import com.github.pwittchen.rxbiometric.library.RxBiometric.Companion
 import java.util.concurrent.Executor
 
@@ -25,7 +24,6 @@ class RxBiometricBuilder {
   internal lateinit var description: String
   internal lateinit var negativeButtonText: String
   internal lateinit var negativeButtonListener: DialogInterface.OnClickListener
-  internal lateinit var cancellationSignal: CancellationSignal
   internal lateinit var executor: Executor
 
   fun title(title: String): RxBiometricBuilder {
@@ -45,11 +43,6 @@ class RxBiometricBuilder {
 
   fun negativeButtonListener(negativeButtonListener: DialogInterface.OnClickListener): RxBiometricBuilder {
     this.negativeButtonListener = negativeButtonListener
-    return this
-  }
-
-  fun cancellationSignal(cancellationSignal: CancellationSignal): RxBiometricBuilder {
-    this.cancellationSignal = cancellationSignal
     return this
   }
 

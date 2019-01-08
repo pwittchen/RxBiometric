@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "pwittchen.github.com.rxbiometric"
@@ -36,9 +35,9 @@ android {
 dependencies {
   implementation project(':library')
   implementation deps.kotlinstdlib
-  implementation deps.appcompatv7
+  implementation deps.appcompat
   implementation deps.constraintlayout
-  implementation deps.design
+  implementation deps.material
 }
 
 buildscript {

@@ -11,7 +11,6 @@ apply from: '../maven_push.gradle'
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
@@ -127,7 +126,8 @@ dependencies {
   api deps.rxjava2
   api deps.rxandroid2
   api deps.rxkotlin2
-  implementation deps.supportannotations
+  implementation deps.annotations
+  implementation deps.biometrics
   implementation deps.kotlinstdlib
   testImplementation deps.junit
   testImplementation deps.truth

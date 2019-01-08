@@ -13,10 +13,11 @@ ext.deps = [
               rxjava2             : 'io.reactivex.rxjava2:rxjava:2.2.0',
               rxandroid2          : 'io.reactivex.rxjava2:rxandroid:2.0.2',
               rxkotlin2           : 'io.reactivex.rxjava2:rxkotlin:2.3.0',
-              supportannotations  : 'com.android.support:support-annotations:28.0.0-rc01',
-              appcompatv7         : 'com.android.support:appcompat-v7:28.0.0-rc01',
+              annotations         : 'androidx.annotation:annotation:1.0.1',
+              appcompat           : 'androidx.appcompat:appcompat:1.1.0-alpha01',
+              material            : 'com.google.android.material:material:1.1.0-alpha02',
               design              : 'com.android.support:design:28.0.0-rc01',
-              constraintlayout    : 'com.android.support.constraint:constraint-layout:1.1.2',
+              constraintlayout    : 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3',
               junit               : 'junit:junit:4.12',
               truth               : 'com.google.truth:truth:0.42',
               robolectric         : 'org.robolectric:robolectric:4.0-alpha-3',
@@ -26,7 +27,8 @@ ext.deps = [
               ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
               kotlinx             : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
               kotlinstdlib        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-              kotlingradleplugin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"]
+              kotlingradleplugin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+              biometrics          : "androidx.biometric:biometric:1.0.0-alpha03"]
 
 buildscript {
   repositories {
@@ -39,7 +41,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.1.4'
+    classpath 'com.android.tools.build:gradle:3.2.1'
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files
   }
