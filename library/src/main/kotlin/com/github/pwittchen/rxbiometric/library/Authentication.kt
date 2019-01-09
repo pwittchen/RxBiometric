@@ -17,11 +17,8 @@ package com.github.pwittchen.rxbiometric.library
 
 import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.AuthenticationResult
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
-import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
 import io.reactivex.CompletableEmitter
 
 open class Authentication {

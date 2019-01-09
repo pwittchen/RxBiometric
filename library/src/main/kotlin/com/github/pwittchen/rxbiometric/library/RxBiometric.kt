@@ -15,14 +15,11 @@
  */
 package com.github.pwittchen.rxbiometric.library
 
-import android.content.Context
 import android.content.DialogInterface
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.CryptoObject
-import android.os.Build
 import android.os.CancellationSignal
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter

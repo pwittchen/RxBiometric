@@ -66,11 +66,11 @@ class AuthenticationTest {
     verify(emitter).tryOnError(any(AuthenticationError::class.java))
   }
 
-  @Test fun shouldTryOnErrorOnAuthenticationHelp() {
-    // when
-    callback.onAuthenticationHelp(2, "help needed")
-
-    // then
-    verify(emitter).tryOnError(any(AuthenticationHelp::class.java))
-  }
+//  @Test fun shouldTryOnErrorOnAuthenticationHelp() {
+//    // when
+//    callback.onAuthenticationHelp(2, "help needed")
+//
+//    // then
+//    verify(emitter).tryOnError(any(AuthenticationHelp::class.java))
+//  }
 }
