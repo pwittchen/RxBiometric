@@ -89,9 +89,7 @@ class RxBiometric {
     @JvmStatic
     fun authenticate(activity: FragmentActivity): Completable {
       return Completable.create { emitter ->
-        createPrompt(activity,emitter).authenticate(
-          promptInfo
-        )
+        createPrompt(activity, emitter).authenticate(promptInfo)
       }.subscribeOn(AndroidSchedulers.mainThread())
     }
 

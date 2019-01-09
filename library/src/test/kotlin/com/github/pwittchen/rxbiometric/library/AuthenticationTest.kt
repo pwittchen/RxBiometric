@@ -19,7 +19,6 @@ import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.AuthenticationResult
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationFail
-import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationHelp
 import io.reactivex.CompletableEmitter
 import org.junit.Before
 import org.junit.Test
@@ -65,12 +64,4 @@ class AuthenticationTest {
     // then
     verify(emitter).tryOnError(any(AuthenticationError::class.java))
   }
-
-//  @Test fun shouldTryOnErrorOnAuthenticationHelp() {
-//    // when
-//    callback.onAuthenticationHelp(2, "help needed")
-//
-//    // then
-//    verify(emitter).tryOnError(any(AuthenticationHelp::class.java))
-//  }
 }
