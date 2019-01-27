@@ -16,20 +16,15 @@
 package com.github.pwittchen.rxbiometric.library.validation
 
 import android.content.Context
+import android.os.Build.VERSION_CODES
+import androidx.annotation.RequiresApi
 import io.reactivex.Single
 
 class RxPreconditions {
   companion object {
+    @RequiresApi(VERSION_CODES.M)
     @JvmStatic fun hasBiometricSupport(context: Context): Single<Boolean> {
       return Single.just(Preconditions.hasBiometricSupport(context))
-    }
-
-    @JvmStatic fun isAtLeastAndroidPie(): Single<Boolean> {
-      return Single.just(Preconditions.isAtLeastAndroidPie())
-    }
-
-    @JvmStatic fun canHandleBiometric(context: Context): Single<Boolean> {
-      return hasBiometricSupport(context)
     }
   }
 }

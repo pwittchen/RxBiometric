@@ -49,20 +49,18 @@ RxBiometric
   )
 ```
 
-Library also have validation methods in the `Preconditions` class, which you can use to verify if you're able to use Biometric.
+Library also have validation method in the `Preconditions` class, which you can use to verify if you're able to use Biometric.
 
 ```kotlin
 Preconditions.hasBiometricSupport(context)
-Preconditions.isAtLeastAndroidPie()
-Preconditions.canHandleBiometric() // all conditions above are satisfied
 ```
 
-There's also `RxPreconditions` class, which has the same methods wrapped in RxJava `Single<Boolean>` type,
+There's also `RxPreconditions` class, which has the same method wrapped in RxJava `Single<Boolean>` type,
 which you can use to create fluent data flow like in the example below
 
 ```kotlin
 RxPreconditions
-  .canHandleBiometric(context)
+  .hasBiometricSupport(context)
   .flatMapCompletable {
     if (!it) Completable.error(BiometricNotSupported())
     else

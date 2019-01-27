@@ -18,9 +18,9 @@ package pwittchen.github.com.rxbiometric
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.github.pwittchen.rxbiometric.library.RxBiometric
 import com.github.pwittchen.rxbiometric.library.throwable.AuthenticationError
@@ -31,7 +31,6 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_main.button
 
@@ -46,10 +45,10 @@ class MainActivity : AppCompatActivity() {
     setSupportActionBar(toolbar)
 
 
-    button.setOnClickListener { _ ->
+    button.setOnClickListener {
       disposable =
         RxPreconditions
-          .canHandleBiometric(this)
+          .hasBiometricSupport(this)
           .flatMapCompletable {
             if (!it) Completable.error(BiometricNotSupported())
             else
@@ -64,19 +63,19 @@ class MainActivity : AppCompatActivity() {
                 .build()
                 .authenticate(this)
           }
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy(
-          onComplete = { showMessage("authenticated!") },
-          onError = {
-            when (it) {
-              is AuthenticationError -> showMessage("error: ${it.errorCode} ${it.errorMessage}")
-              is AuthenticationFail -> showMessage("fail")
-              else -> {
-                showMessage("other error")
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribeBy(
+            onComplete = { showMessage("authenticated!") },
+            onError = {
+              when (it) {
+                is AuthenticationError -> showMessage("error: ${it.errorCode} ${it.errorMessage}")
+                is AuthenticationFail -> showMessage("fail")
+                else -> {
+                  showMessage("other error")
+                }
               }
             }
-          }
-        )
+          )
     }
   }
 
