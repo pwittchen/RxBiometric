@@ -110,7 +110,7 @@ You can depend on the library through Gradle:
 
 ```groovy
 dependencies {
-  implementation 'com.github.pwittchen:rxbiometric:0.0.1'
+  implementation 'com.github.pwittchen:rxbiometric:0.1.0'
 }
 ```
 
