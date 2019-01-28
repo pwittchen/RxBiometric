@@ -3,7 +3,7 @@ CHANGELOG
 
 v. 0.1.0
 --------
-*?*
+*28 Jan 2019*
 
 - used `androidx.biometrics` to support devices since Android 6 (Marshmallow) - issue #1, PR #9 
 - removed `Preconditions#isAtLeastAndroidPie()` method
