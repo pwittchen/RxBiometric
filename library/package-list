@@ -1,7 +1,0 @@
-$dokka.format:html
-$dokka.linkExtension:html
-
-com.github.pwittchen.rxbiometric.library
-com.github.pwittchen.rxbiometric.library.throwable
-com.github.pwittchen.rxbiometric.library.validation
-io.reactivex.android
