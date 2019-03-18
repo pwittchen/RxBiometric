@@ -3,7 +3,7 @@
 git checkout master
 ./gradlew dokka
 git checkout gh-pages
-rm -rf *
+rm -rf library/
 cp -avr library/build/docs/javadoc/* ./
 git add -A
 git commit -m "updating JavaDoc"
