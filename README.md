@@ -37,7 +37,6 @@ RxBiometric
   .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
     showMessage("cancel")
   })
-  .cancellationSignal(cancellationSignal)
   .executor(mainExecutor)
   .build()
   .authenticate(context)
@@ -71,7 +70,6 @@ RxPreconditions
         .negativeButtonListener(DialogInterface.OnClickListener { _, _ ->
           showMessage("cancel")
         })
-        .cancellationSignal(CancellationSignal())
         .executor(mainExecutor)
         .build()
         .authenticate(context)
