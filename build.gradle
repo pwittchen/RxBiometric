@@ -21,7 +21,7 @@ ext.deps = [
               constraintlayout    : 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3',
               junit               : 'junit:junit:4.12',
               truth               : 'com.google.truth:truth:0.42',
-              robolectric         : 'org.robolectric:robolectric:4.0-alpha-3',
+              robolectric         : 'org.robolectric:robolectric:4.3',
               mockitocore         : 'org.mockito:mockito-core:2.28.2',
               dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.17',
               detekt              : "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion",
