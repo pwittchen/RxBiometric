@@ -3,6 +3,7 @@ language: android
 android:
   components:
     - tools
+    - tools
     - platform-tools
     - build-tools-28
     - android-28
@@ -15,13 +16,13 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
-jdk: oraclejdk8
+install:
+  - true
 
 before_install:
   - yes | sdkmanager "platforms;android-27"
 
-install:
-  - true
+jdk: oraclejdk8
 
 script:
   - ./gradlew clean build test check
@@ -29,3 +30,4 @@ script:
 cache:
   directories:
     - $HOME/.m2
+
