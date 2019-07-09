@@ -22,7 +22,7 @@ ext.deps = [
               junit               : 'junit:junit:4.12',
               truth               : 'com.google.truth:truth:1.0',
               robolectric         : 'org.robolectric:robolectric:4.3',
-              mockitocore         : 'org.mockito:mockito-core:2.28.2',
+              mockitocore         : 'org.mockito:mockito-core:3.0.0',
               dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18',
               detekt              : "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion",
               ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
