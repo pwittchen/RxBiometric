@@ -13,7 +13,7 @@ ext {
 ext.deps = [
               rxjava2             : 'io.reactivex.rxjava2:rxjava:2.2.10',
               rxandroid2          : 'io.reactivex.rxjava2:rxandroid:2.1.1',
-              rxkotlin2           : 'io.reactivex.rxjava2:rxkotlin:2.3.0',
+              rxkotlin2           : 'io.reactivex.rxjava2:rxkotlin:2.4.0',
               annotations         : 'androidx.annotation:annotation:1.1.0',
               appcompat           : 'androidx.appcompat:appcompat:1.1.0-rc01',
               material            : 'com.google.android.material:material:1.1.0-alpha08',
