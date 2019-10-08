@@ -23,7 +23,7 @@ ext.deps = [
               truth               : 'com.google.truth:truth:1.0',
               robolectric         : 'org.robolectric:robolectric:4.3',
               mockitocore         : 'org.mockito:mockito-core:3.1.0',
-              dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18',
+              dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.10.0',
               detekt              : "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion",
               ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
               kotlinx             : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
