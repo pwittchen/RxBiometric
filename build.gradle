@@ -25,7 +25,6 @@ ext.deps = [
               mockitocore         : 'org.mockito:mockito-core:3.3.1',
               dokka               : 'org.jetbrains.dokka:dokka-gradle-plugin:0.10.1',
               detekt              : "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detektVersion",
-              ktlintgradle        : "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:4.1.0",
               kotlinx             : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion",
               kotlinstdlib        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
               kotlingradleplugin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
@@ -42,7 +41,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.5.3'
+    classpath 'com.android.tools.build:gradle:3.6.1'
     classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files

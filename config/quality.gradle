@@ -1,9 +1,8 @@
 apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
 // Add dependencies to the 'check' gradle task.
-check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint', 'detektCheck', 'ktlintCheck'
+check.dependsOn 'checkstyle', 'pmd', 'lint', 'detektCheck'
 
 checkstyle {
     toolVersion = "6.0"
@@ -16,32 +15,6 @@ task checkstyle(type: Checkstyle) {
     include '**/*.java'
     include '**/*.kt'
     exclude '**/gen/**'
-    classpath = files()
-}
-
-task findbugs(type: FindBugs) {
-    ignoreFailures = false
-    effort = "max"
-    reportLevel = "high"
-    excludeFilter = new File("${project.rootDir}/config/quality/findbugs/findbugs-filter.xml")
-    classes = files("${project.rootDir}/library/build/intermediates/javac")
-
-    source 'src'
-    include '**/*.java'
-    include '**/*.kt'
-    exclude '**/gen/**'
-
-    reports {
-        xml.enabled = false
-        html.enabled = true
-        xml {
-            destination file("$project.buildDir/reports/findbugs/findbugs.xml")
-        }
-        html {
-            destination file("$project.buildDir/reports/findbugs/findbugs.html")
-        }
-    }
-
     classpath = files()
 }
 
