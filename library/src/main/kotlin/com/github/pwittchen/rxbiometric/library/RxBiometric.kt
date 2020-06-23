@@ -28,8 +28,9 @@ class RxBiometric {
   companion object {
     private lateinit var title: String
     private lateinit var description: String
-    private lateinit var negativeButtonText: String
-    private lateinit var negativeButtonListener: DialogInterface.OnClickListener
+    private var negativeButtonText: String? = null
+    private var deviceCredentialAllowed: Boolean = false
+    private var negativeButtonListener: DialogInterface.OnClickListener? = null
     private lateinit var executor: Executor
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
@@ -41,11 +42,17 @@ class RxBiometric {
       this.description = builder.description
       this.negativeButtonText = builder.negativeButtonText
       this.negativeButtonListener = builder.negativeButtonListener
+      this.deviceCredentialAllowed = builder.deviceCredentialAllowed
       this.executor = builder.executor
-      this.promptInfo = BiometricPrompt.PromptInfo.Builder()
+      val promptBuilder = BiometricPrompt.PromptInfo.Builder()
+        .setDeviceCredentialAllowed(deviceCredentialAllowed)
         .setTitle(title)
         .setDescription(description)
-        .setNegativeButtonText(negativeButtonText).build()
+
+      negativeButtonText?.let {
+        promptBuilder.setNegativeButtonText(it)
+      }
+      this.promptInfo = promptBuilder.build()
       return this
     }
 
@@ -57,6 +64,11 @@ class RxBiometric {
     @JvmStatic
     fun title(title: String): RxBiometricBuilder {
       return builder().title(title)
+    }
+
+    @JvmStatic
+    fun deviceCredentialAllowed(enable: Boolean): RxBiometricBuilder {
+      return builder().deviceCredentialAllowed(enable)
     }
 
     @JvmStatic
@@ -74,7 +86,8 @@ class RxBiometric {
       return builder().negativeButtonListener(listener)
     }
 
-    @JvmStatic fun executor(executor: Executor): RxBiometricBuilder {
+    @JvmStatic
+    fun executor(executor: Executor): RxBiometricBuilder {
       return builder().executor(executor)
     }
 

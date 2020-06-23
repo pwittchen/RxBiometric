@@ -22,9 +22,15 @@ import java.util.concurrent.Executor
 class RxBiometricBuilder {
   internal lateinit var title: String
   internal lateinit var description: String
-  internal lateinit var negativeButtonText: String
-  internal lateinit var negativeButtonListener: DialogInterface.OnClickListener
+  internal var negativeButtonText: String? = null
+  internal var negativeButtonListener: DialogInterface.OnClickListener? = null
   internal lateinit var executor: Executor
+  internal var deviceCredentialAllowed: Boolean = false
+
+  fun deviceCredentialAllowed(enable: Boolean): RxBiometricBuilder {
+    this.deviceCredentialAllowed = enable
+    return this
+  }
 
   fun title(title: String): RxBiometricBuilder {
     this.title = title
