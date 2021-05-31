@@ -16,6 +16,7 @@
 package com.github.pwittchen.rxbiometric.library
 
 import android.content.DialogInterface
+import android.os.Build
 import com.github.pwittchen.rxbiometric.library.RxBiometric.Companion
 import java.util.concurrent.Executor
 
@@ -30,7 +31,7 @@ class RxBiometricBuilder {
   internal var allowedAuthenticators: Int? = null
 
   fun deviceCredentialAllowed(enable: Boolean): RxBiometricBuilder {
-    this.deviceCredentialAllowed = enable
+    if (Build.VERSION.SDK_INT < 30) this.deviceCredentialAllowed = enable
     return this
   }
 
@@ -39,8 +40,8 @@ class RxBiometricBuilder {
     return this
   }
 
-  fun allowedAuthenticators(value: Int): RxBiometricBuilder {
-    this.allowedAuthenticators = value
+  fun allowedAuthenticators(@AuthenticatorTypes value: Int): RxBiometricBuilder {
+    if (Build.VERSION.SDK_INT >= 29) this.allowedAuthenticators = value
     return this
   }
 

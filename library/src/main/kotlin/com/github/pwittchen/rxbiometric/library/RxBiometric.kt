@@ -17,6 +17,8 @@ package com.github.pwittchen.rxbiometric.library
 
 import android.content.DialogInterface
 import android.os.Build
+import androidx.annotation.IntDef
+import androidx.biometric.BiometricManager.Authenticators
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.CryptoObject
@@ -24,6 +26,9 @@ import androidx.fragment.app.FragmentActivity
 import io.reactivex.Completable
 import io.reactivex.CompletableEmitter
 import java.util.concurrent.Executor
+
+@IntDef(flag = true, value = [Authenticators.BIOMETRIC_STRONG, Authenticators.BIOMETRIC_WEAK, Authenticators.DEVICE_CREDENTIAL])
+internal annotation class AuthenticatorTypes
 
 class RxBiometric {
   companion object {
@@ -91,7 +96,7 @@ class RxBiometric {
     }
 
     @JvmStatic
-    fun allowedAuthenticators(value: Int): RxBiometricBuilder {
+    fun allowedAuthenticators(@AuthenticatorTypes value: Int): RxBiometricBuilder {
       if (Build.VERSION.SDK_INT >= 29) return builder().allowedAuthenticators(value)
       return builder()
     }
