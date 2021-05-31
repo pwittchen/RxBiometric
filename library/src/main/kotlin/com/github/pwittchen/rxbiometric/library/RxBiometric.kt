@@ -16,6 +16,7 @@
 package com.github.pwittchen.rxbiometric.library
 
 import android.content.DialogInterface
+import android.os.Build
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.AuthenticationCallback
 import androidx.biometric.BiometricPrompt.CryptoObject
@@ -29,8 +30,10 @@ class RxBiometric {
     private lateinit var title: String
     private lateinit var description: String
     private var negativeButtonText: String? = null
-    private var deviceCredentialAllowed: Boolean = false
+    private var deviceCredentialAllowed: Boolean? = null
     private var negativeButtonListener: DialogInterface.OnClickListener? = null
+    private var confirmationRequired: Boolean = false
+    private var allowedAuthenticators: Int? = null
     private lateinit var executor: Executor
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
@@ -43,11 +46,21 @@ class RxBiometric {
       this.negativeButtonText = builder.negativeButtonText
       this.negativeButtonListener = builder.negativeButtonListener
       this.deviceCredentialAllowed = builder.deviceCredentialAllowed
+      this.allowedAuthenticators = builder.allowedAuthenticators
+      this.confirmationRequired = builder.confirmationRequired
       this.executor = builder.executor
       val promptBuilder = BiometricPrompt.PromptInfo.Builder()
-        .setDeviceCredentialAllowed(deviceCredentialAllowed)
+        .setConfirmationRequired(confirmationRequired)
         .setTitle(title)
         .setDescription(description)
+
+      deviceCredentialAllowed?.let {
+        promptBuilder.setDeviceCredentialAllowed(it)
+      }
+
+      allowedAuthenticators?.let {
+        promptBuilder.setAllowedAuthenticators(it)
+      }
 
       negativeButtonText?.let {
         promptBuilder.setNegativeButtonText(it)
@@ -68,7 +81,19 @@ class RxBiometric {
 
     @JvmStatic
     fun deviceCredentialAllowed(enable: Boolean): RxBiometricBuilder {
-      return builder().deviceCredentialAllowed(enable)
+      if (Build.VERSION.SDK_INT < 30) return builder().deviceCredentialAllowed(enable)
+      return builder()
+    }
+
+    @JvmStatic
+    fun confirmationRequired(enable: Boolean): RxBiometricBuilder {
+      return builder().confirmationRequired(enable)
+    }
+
+    @JvmStatic
+    fun allowedAuthenticators(value: Int): RxBiometricBuilder {
+      if (Build.VERSION.SDK_INT >= 29) return builder().allowedAuthenticators(value)
+      return builder()
     }
 
     @JvmStatic
