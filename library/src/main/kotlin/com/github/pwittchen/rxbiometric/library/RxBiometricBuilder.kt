@@ -25,10 +25,22 @@ class RxBiometricBuilder {
   internal var negativeButtonText: String? = null
   internal var negativeButtonListener: DialogInterface.OnClickListener? = null
   internal lateinit var executor: Executor
-  internal var deviceCredentialAllowed: Boolean = false
+  internal var deviceCredentialAllowed: Boolean? = null
+  internal var confirmationRequired: Boolean = false
+  internal var allowedAuthenticators: Int? = null
 
   fun deviceCredentialAllowed(enable: Boolean): RxBiometricBuilder {
     this.deviceCredentialAllowed = enable
+    return this
+  }
+
+  fun confirmationRequired(enable: Boolean): RxBiometricBuilder {
+    this.confirmationRequired = enable
+    return this
+  }
+
+  fun allowedAuthenticators(value: Int): RxBiometricBuilder {
+    this.allowedAuthenticators = value
     return this
   }
 
