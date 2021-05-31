@@ -8,7 +8,8 @@ android {
   defaultConfig {
     applicationId "pwittchen.github.com.rxbiometric"
     minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
     versionName "1.0"
   }
