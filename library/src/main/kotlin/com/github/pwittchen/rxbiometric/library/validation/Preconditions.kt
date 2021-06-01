@@ -17,14 +17,25 @@ package com.github.pwittchen.rxbiometric.library.validation
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Build.VERSION_CODES
-import androidx.annotation.RequiresApi
+import androidx.biometric.BiometricManager
+import com.github.pwittchen.rxbiometric.library.AuthenticatorTypes
 
 class Preconditions {
   companion object {
-    @RequiresApi(VERSION_CODES.M)
     @JvmStatic fun hasBiometricSupport(context: Context): Boolean {
-      return context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+      if (Build.VERSION.SDK_INT >= VERSION_CODES.M) {
+        return context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+          || context.packageManager.hasSystemFeature(PackageManager.FEATURE_FACE)
+          || context.packageManager.hasSystemFeature(PackageManager.FEATURE_IRIS)
+      }
+      return context.packageManager.hasSystemFeature(PackageManager.FEATURE_FACE)
+        || context.packageManager.hasSystemFeature(PackageManager.FEATURE_IRIS)
+    }
+
+    @JvmStatic fun canAuthenticateWith(context: Context, @AuthenticatorTypes authenticators: Int): Boolean {
+      return BiometricManager.from(context).canAuthenticate(authenticators) == BiometricManager.BIOMETRIC_SUCCESS
     }
   }
 }
