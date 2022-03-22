@@ -8,6 +8,13 @@ RxJava and RxKotlin bindings for Biometric Prompt (Fingerprint Scanner) on Andro
 
 It's an official statement from [Google Android Developers Blog](https://android-developers.googleblog.com/2018/08/introducing-android-9-pie.html). RxBiometric helps you to do that via RxJava stream!
 
+Partners
+--------
+
+Oxylabs is a provider of proxy and web scraping solutions
+
+[![Oxylabs](oxylabs_logo.png)](https://oxylabs.io?utm_source=pwittchen&utm_medium=cpc&utm_campaign=pwittchen_github_partner&adgroupid=210320221)
+
 Contents
 --------
 
